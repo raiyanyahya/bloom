@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"bloom/raiyan"
 	"fmt"
 	"log"
 	"os"
@@ -18,14 +19,17 @@ var deployCmd = &cobra.Command{
 func deploy(cmd *cobra.Command, args []string) {
 	fmt.Println("deploy", out)
 	checkFolderExists(out)
+	s3Obj := raiyan.S3Objectt{}
+	s3client := raiyan.GetClient(s3Obj)
+	fmt.Print(s3client)
 }
 
 func checkFolderExists(out string) {
-	folderInfo, err := os.Stat(out)
+	_, err := os.Stat(out)
 	if os.IsNotExist(err) {
 		log.Fatalf("Build folder '%s' does not exist.", out)
 	}
-	log.Println(folderInfo)
+	log.Printf("Build folder '%s' . Moving on ...", out)
 }
 func init() {
 	rootCmd.AddCommand(deployCmd)
