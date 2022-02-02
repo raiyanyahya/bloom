@@ -13,15 +13,14 @@ import (
 var deployCmd = &cobra.Command{
 	Use:   "deploy",
 	Short: "Deploy your website",
-	Long:  "Deploy your website on bloom.",
+	Long:  "Deploy your website with the bloom.",
 	Run:   deploy,
 }
 
 func deploy(cmd *cobra.Command, args []string) {
 	fmt.Println("deploy", out)
 	checkFolderExists(out)
-	s3Obj := cloud.S3Objectt{}
-	s3client := cloud.GetClient(s3Obj).(*s3.S3)
+	s3client := cloud.GetClient(cloud.S3Object{}).(*s3.S3)
 	fmt.Print(s3client)
 }
 
