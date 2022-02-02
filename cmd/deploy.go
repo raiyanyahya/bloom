@@ -1,11 +1,12 @@
 package cmd
 
 import (
-	"bloom/raiyan"
+	"bloom/cloud"
 	"fmt"
 	"log"
 	"os"
 
+	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/spf13/cobra"
 )
 
@@ -19,8 +20,8 @@ var deployCmd = &cobra.Command{
 func deploy(cmd *cobra.Command, args []string) {
 	fmt.Println("deploy", out)
 	checkFolderExists(out)
-	s3Obj := raiyan.S3Objectt{}
-	s3client := raiyan.GetClient(s3Obj)
+	s3Obj := cloud.S3Objectt{}
+	s3client := cloud.GetClient(s3Obj).(*s3.S3)
 	fmt.Print(s3client)
 }
 

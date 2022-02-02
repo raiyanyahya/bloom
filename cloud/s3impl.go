@@ -1,4 +1,4 @@
-package raiyan
+package cloud
 
 import (
 	"log"
@@ -8,14 +8,10 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3"
 )
 
-type ObjectStore interface {
-	Client() interface{}
+type S3Object struct {
 }
 
-type S3Objectt struct {
-}
-
-func (s S3Objectt) Client() interface{} {
+func (s S3Object) Client() interface{} {
 	session, err := session.NewSession(&aws.Config{Region: aws.String("eu-west-1")})
 	if err != nil {
 		log.Fatalf("could not initialize new aws session: %v", err)
